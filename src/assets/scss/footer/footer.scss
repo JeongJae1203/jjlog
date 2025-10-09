@@ -1,0 +1,42 @@
+@use '@/assets/scss/variables' as *;
+
+#footer {
+  position: relative;
+  width: 100%;
+  border-top: 1px solid #DDD;
+
+  .inner {
+    padding: 1.5rem;
+  }
+
+  .footer__info {
+    text-align: center;
+
+    small {
+      display: block;
+      font-size: 1.3rem;
+      color: $copyright-color;
+      line-height: 1.5;
+    }
+  }
+}
+
+@media all and (min-width: 768px) {
+  #footer {
+    .footer__info {
+      small {
+        font-size: 1.5rem;
+      }
+    }
+  }
+}
+
+@media all and (min-width: 1024px) {
+  #footer {
+    .footer__info {
+      small {
+        font-size: 1.6rem;
+      }
+    }
+  }
+}

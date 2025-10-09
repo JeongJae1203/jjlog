@@ -1,0 +1,42 @@
+.home__top {
+  position: relative;
+  padding-top: 3rem;
+  text-align: right;
+}
+
+.card__wrap {
+  position: relative;
+  margin-top: 2rem;
+
+  .card {
+    + .card {
+      margin-top: 1.5rem;
+    }
+  }
+}
+
+@media all and (min-width: 768px) {
+  .card__wrap {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+
+    .card {
+      + .card {
+        margin-top: 0;
+      }
+    }
+  }
+}
+
+@media all and (min-width: 1024px) {
+  .card__wrap {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media all and (min-width: 1400px) {
+  .card__wrap {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

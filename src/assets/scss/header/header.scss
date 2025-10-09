@@ -1,0 +1,112 @@
+@use '@/assets/scss/variables' as *;
+
+#header {
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  z-index: 100;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, .1);
+  
+  .inner {
+    display: flex;
+    align-items: center;
+    padding: 1.5rem;
+  }
+
+  .header__logo {
+    .header__logo-link {
+      font: {
+        family: 'Google Sans Code', sans-serif;
+        size: 2rem;
+        weight: 500;
+      }
+    }
+  }
+
+  .header__util {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-left: auto;
+
+    button {
+      position: relative;
+      padding: 1rem 1.2rem;
+      border-radius: 100%;
+
+      &::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        bottom: -100%;
+        padding: .5rem 2rem;
+        background-color: $base-body-color;
+        border-radius: 6px;
+        opacity: 0;
+        visibility: hidden;
+        font: {
+          size: 1.2rem;
+          weight: 400;
+        }
+        color: #fff;
+        transition: .35s;
+      }
+
+      &:hover {
+        background-color: rgba(0, 0, 0, .5);
+        color: #fff;
+
+        &::after {
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+
+      &.btn__search {
+        &::after {
+          content: 'Search';
+        }
+      }
+
+      &.btn__login {
+        &::after {
+          content: 'Login';
+        }
+      }
+
+      &.btn__logout {
+        &::after {
+          content: 'Logout';
+        }
+      }
+    }
+  }
+
+  .header__util-profile {
+    display: none;
+  }
+}
+
+@media all and (min-width: 768px) {
+  #header {
+    .header__util-profile {
+      &.login {
+        display: block;
+      }
+
+      .header__util-profile-name {
+        display: inline-flex;
+        align-items: center;
+        gap: 1rem;
+      }
+    }
+  }
+}
+
+@media all and (min-width: 1440px) {
+  #header {
+    .inner {
+      padding: 2rem 0;
+    }
+  }
+}

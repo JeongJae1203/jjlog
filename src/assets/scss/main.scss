@@ -1,0 +1,84 @@
+@use './font' as *;
+@use './variables' as *;
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 10px; }
+body {
+  font: {
+    family: 'Noto Sans KR', sans-serif;
+    size: 1.6rem;
+    weight: 400;
+  }
+  color: $base-body-color;
+}
+
+a { text-decoration: none; color: inherit; }
+img { max-width: 100%;}
+
+button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: .75rem 1.5rem;
+  background-color: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: inherit;
+  cursor: pointer;
+  transition: .35s;
+}
+
+.inner {
+  position: relative;
+  padding: 0 1.5rem;
+}
+
+input {
+  appearance: none;
+  width: 100%;
+  min-height: 3.5rem;
+  padding: 0 1rem;
+  border: 1px solid #DDD;
+  border-radius: 4px;
+  outline: none;
+  font: {
+    family: 'Noto Sans KR', sans-serif;
+    size: 1.4rem;
+    weight: 400;
+  }
+  color: #444;
+  transition: .35s;
+
+  &:focus {
+    border-color: #5b86e5;
+  }
+
+  &::placeholder {
+    font-size: 1.3rem;
+    color: #999;
+  }
+}
+
+@media all and (min-width: 768px) {
+  .inner {
+    max-width: 144rem;
+    margin: 0 auto;
+  }
+
+  input {
+    min-height: 4rem;
+    padding: 0 1.5rem;
+    font-size: 1.6rem;
+
+    &::placeholder {
+      font-size: 1.5rem;
+    }
+  }
+}
+
+@media all and (min-width: 1400px) {
+  .inner {
+    padding: 0;
+  }
+}
