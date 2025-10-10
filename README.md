@@ -14,3 +14,7 @@
   - 사용 이유
     - NHN에서 만든 Editor (지속적으로 유지보수 진행)
     - Markdown & Preview 지원
+
+
+## Test 계정
+1. test@test.com / 1111

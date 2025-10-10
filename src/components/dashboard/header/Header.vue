@@ -2,7 +2,7 @@
   <header class="dashboard-header">
     <div class="inner">
       <div class="dashboard-header__left">
-        <h1>대시보드</h1>
+        <router-link to="/">대시보드</router-link>
       </div>
       <div class="dashboard-header__right">
         <div class="user-info">

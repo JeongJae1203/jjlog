@@ -58,6 +58,11 @@ input {
     font-size: 1.3rem;
     color: #999;
   }
+
+  &:read-only {
+    background-color: #f5f5f5;
+    cursor: not-allowed;
+  }
 }
 
 @media all and (min-width: 768px) {

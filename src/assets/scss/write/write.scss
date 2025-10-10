@@ -24,9 +24,29 @@
 
 .write__wrap {
   .write__item {
+    + .write__item {
+      margin-top: 1.5rem;
+    }
+
     label {
       display: block;
       margin-bottom: 1rem;
+    }
+
+    select {
+      width: 100%;
+      min-height: 3.5rem;
+      padding: 0 1rem;
+      border: 1px solid #DDD;
+      border-radius: 4px;
+      outline: none;
+      font: {
+        family: 'Noto Sans KR', sans-serif;
+        size: 1.4rem;
+        weight: 400;
+      }
+      color: #444;
+      transition: .35s;
     }
   }
 }
@@ -41,7 +61,16 @@
   .write__wrap {
     .write__item {
       display: flex;
+      align-items: center;
       gap: 1.5rem;
+      
+      &.align-start {
+        align-items: flex-start;
+      }
+
+      + .write__item {
+        margin-top: 2.5rem;
+      }
 
       label {
         margin-bottom: 0;
@@ -52,6 +81,14 @@
         }
       }
 
+      select {
+        max-width: 20rem;
+        min-height: 4rem;
+        padding: 0 1.5rem;
+        font-size: 1.6rem;
+      }
+
+      input,
       .write__item-editor {
         width: calc(100% - 15.5rem);
       }

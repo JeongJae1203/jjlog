@@ -16,6 +16,17 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, .16);
   }
 
+  .login__desc {
+    margin-bottom: 3rem;
+    background-color: #f5f5f5;
+    padding: 1rem 2rem;
+    font-size: 1.4rem;
+
+    span {
+      color: #ff0000;
+    }
+  }
+
   .login__logo {
     max-height: 20rem;
 
@@ -44,6 +55,17 @@
 
     .input__wrap {
       margin-bottom: 1.5rem;
+
+      &.required {
+        label {
+          &::after {
+            content: '*';
+            display: inline-block;
+            margin-left: .5rem;
+            color: #ff0000;
+          }
+        }
+      }
 
       &:last-child {
         margin-bottom: 0;

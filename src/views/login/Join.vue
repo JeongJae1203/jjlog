@@ -8,9 +8,24 @@
       </div>
       <div class="login__content">
         <h2 class="login__title">회원가입</h2>
+        <p class="login__desc">
+          <span>*</span> 표시는 필수 입력 항목입니다.
+        </p>
         <!-- TODO : form -->
         <form @submit.prevent="submitHandler">
-          <div class="input__wrap">
+          <div class="input__wrap required">
+            <label for="nickname">이름</label>
+            <input 
+              type="text" 
+              name="name" 
+              id="name"
+              placeholder="이름"
+              autocomplete="off"
+              required
+              v-model="name"
+            />
+          </div>
+          <div class="input__wrap required">
             <label for="email">이메일</label>
             <input 
               type="email" 
@@ -22,7 +37,7 @@
               v-model="email"
             />
           </div>
-          <div class="input__wrap">
+          <div class="input__wrap required">
             <label for="password">비밀번호</label>
             <input 
               type="password" 
@@ -43,7 +58,6 @@
               id="nickname"
               placeholder="별명"
               autocomplete="off"
-              required
               v-model="nickname"
             />
           </div>
@@ -70,7 +84,8 @@
       return {
         email: '',
         password: '',
-        nickname: ''
+        nickname: '',
+        name: ''
       }
     },
     methods : {
@@ -78,13 +93,15 @@
       async submitHandler() {
         const email = this.email
             , password = this.password
-            , nickname = this.nickname;
+            , nickname = this.nickname
+            , name = this.name;
 
         try {
           const response = await axios.post('http://jarryjeong.pe.kr/auth/regist', {
             email,
             password,
-            nickname
+            nickname,
+            name
           });
 
           // 성공했을 경우, input 초기화 및 main으로 이동
@@ -92,6 +109,7 @@
             this.email = '';
             this.password = '';
             this.nickname = '';
+            this.name = '';
             this.$router.push('/');
           }
         } catch (error) {
