@@ -113,7 +113,8 @@
             this.$router.push('/');
           }
         } catch (error) {
-          console.error('error : ', error);
+          alert(error.response.data);
+          return;
         }
       }
     }
