@@ -1,0 +1,59 @@
+.dashboard-header {
+  position: relative;
+  padding: 2rem 0;
+  background: linear-gradient(to right, #5B86E5, #36D1DC);
+
+  .inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: none;
+    padding: 0 2rem;
+  }
+
+  &__left {
+    a {
+      font: {
+        family: 'Google Sans Code', sans-serif;
+        size: 2rem;
+        weight: 500;
+      }
+      color: #fff;
+    }
+  }
+
+  &__right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .user-info {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      color: #fff;
+
+      span {
+        display: none;
+      }
+    }
+
+    .btn-logout {
+      color: #fff;
+    }
+  }
+}
+
+
+@media all and (min-width: 768px) {
+  .dashboard-header {
+    &__right {
+      .user-info {
+        gap: 2rem;
+        span {
+          display: inline-block;
+        }
+      }
+    }
+  }
+}

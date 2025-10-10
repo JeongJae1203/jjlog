@@ -72,8 +72,10 @@
       },
       logoutHandler() {
         // userStore의 logout 액션 사용
-        this.userStore.logout();
-        this.$router.push('/');
+        if (confirm('로그아웃 하시겠습니까?')) {
+          this.userStore.logout();
+          this.$router.push('/');
+        }
       }
     },
     watch : {
