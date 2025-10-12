@@ -15,13 +15,12 @@
     <!-- 작성자, 조회 수 -->
     <div class="card__content--writer">
       <p class="writer__name">{{ board.name }}</p>
+      <span><i class="pi pi-eye"></i>{{ computedBoardCount }}</span>
     </div>
   </div>
 </template>
 
 <script>
-  import axios from 'axios';
-
   export default {
     props: {
       board: {
@@ -36,6 +35,13 @@
         const date = new Date(createdAt);
 
         return date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+      },
+      computedBoardCount() {
+        if (this.board.board_count > 0) {
+          return this.board.board_count;
+        } else {
+          return 0;
+        }
       }
     }
   }

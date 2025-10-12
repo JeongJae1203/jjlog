@@ -1,0 +1,180 @@
+.BoardDetail {
+  .inner {
+    padding-top: 5rem; 
+    
+    .BoardDetail__header {
+      h2 {
+        margin-bottom: 2rem;
+        font-size: 3rem;
+        font-weight: 500;
+        line-height: 1.5;
+      }
+
+      &-info {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        strong,
+        span {
+          font-size: 1.4rem;
+        }
+
+        strong {
+          font-weight: 500;
+          color: #212429;
+        }
+
+        span {
+          color: #495057;
+        }
+      }
+
+      &-category {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-top: 1.6rem;
+
+        span {
+          display: inline-flex;
+          align-items: center;
+          padding: .75rem 1.5rem;
+          background: linear-gradient(to right, #5B86E5, #36D1DC);
+          border-radius: 45px;
+          font: {
+            size: 1.4rem;
+            weight: 400;
+          }
+          color: #fff;
+        }
+      }
+    }
+
+    .BoardDetail__content {
+      margin-top: 3rem;
+      padding: 3rem;
+      background-color: #fff;
+      min-height: 30rem;
+
+      // Toast UI Viewer 스타일
+      :deep(.toastui-editor-contents) {
+        font-size: 1.6rem;
+        line-height: 1.8;
+        
+        h1, h2, h3, h4, h5, h6 {
+          margin: 2rem 0 1rem;
+          font-weight: 600;
+        }
+        
+        p {
+          margin: 1.5rem 0;
+        }
+        
+        code {
+          background-color: #f8f9fa;
+          padding: 0.2rem 0.4rem;
+          border-radius: 3px;
+          font-size: 0.9em;
+        }
+        
+        pre {
+          background-color: #f8f9fa;
+          padding: 1.5rem;
+          border-radius: 5px;
+          overflow-x: auto;
+        }
+        
+        img {
+          max-width: 100%;
+          height: auto;
+        }
+        
+        blockquote {
+          border-left: 4px solid #5B86E5;
+          padding-left: 1.5rem;
+          color: #495057;
+          margin: 2rem 0;
+        }
+      }
+    }
+    
+    .BoardDetail__footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid #e9ecef;
+      
+      button {
+        padding: 1rem 2rem;
+        border: none;
+        border-radius: 5px;
+        font-size: 1.4rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+      }
+      
+      .btn-list {
+        background: #6c757d;
+        color: white;
+        
+        &:hover {
+          background: #5a6268;
+        }
+      }
+      
+      .btn-group {
+        display: flex;
+        gap: 1rem;
+        
+        .btn-edit {
+          background: linear-gradient(to right, #5B86E5, #36D1DC);
+          color: white;
+          
+          &:hover {
+            background: linear-gradient(to right, #4a75d4, #25c0cb);
+          }
+        }
+        
+        .btn-delete {
+          background: #dc3545;
+          color: white;
+          
+          &:hover {
+            background: #c82333;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media all and (min-width: 768px) {
+  .BoardDetail {
+    .inner {
+      max-width: 120rem;
+      
+      .BoardDetail__header {
+        h2 {
+          margin-bottom: 3rem;
+          font-size: 4rem;
+        }
+
+        &-info {
+          strong,
+          span {
+            font-size: 1.6rem;
+          }
+        }
+      }
+    }
+  }
+}

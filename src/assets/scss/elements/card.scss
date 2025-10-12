@@ -29,6 +29,7 @@
       text-overflow: ellipsis;
       line-height: 1.4;
       color: #495057;
+      word-break: keep-all;
     }
 
     &-date {
@@ -42,15 +43,21 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-top: 1.6rem;
+      margin-top: 1.3rem;
       padding: 1.6rem;
       border-top: 1px solid #ddd;
 
       .writer__name {
-        font: {
-          size: 1.2rem;
-        }
+        font-size: 1.2rem;
         color: #212429;
+      }
+
+      span {
+        font-size: 1.2rem;
+        
+        i {
+          margin-right: .5rem;
+        }
       }
     }
   }
@@ -58,5 +65,15 @@
   &:hover {
     transform: translateY(-8px);
     box-shadow: 0 12px 20px rgba(0, 0, 0, .16);
+  }
+}
+
+@media all and (min-width: 768px) {
+  .card {
+    .card__content {
+      &-summary {
+        height: 7.9rem;
+      }
+    }
   }
 }
