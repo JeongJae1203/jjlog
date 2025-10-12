@@ -9,18 +9,26 @@
       >글쓰기</button>
     </div>
     <div class="card__wrap">
-      <Card />
-      <Card />
-      <Card />
-      <Card />
+      <Card 
+        v-for="board in boardList" 
+        :key="board.board_id" 
+        :board="board" 
+        @click="detailHandler(board.name, board.board_id)" 
+      />
     </div>
   </div>
 </template>
 
 <script>
   import Card from '../components/elements/Card.vue';
+  import axios from 'axios';
 
   export default {
+    data() {
+      return {
+        boardList: []
+      }
+    },
     components : {
       Card
     },
@@ -34,7 +42,25 @@
         }
         // 로그인 했을 경우, 글쓰기 페이지로 이동
         this.$router.push('/write');
+      },
+      async getBoardList() {
+        const response = await axios.get('http://jarryjeong.pe.kr/board/');
+        const data = response.data.data.boards;
+
+        this.boardList = data;
+      },
+      // 카드 클릭 시, detail 페이지로 이동
+      // state로 board_id를 넘겨 detail 페이지에서 state로 상세 조회
+      async detailHandler(userName,boardId) {
+        this.$router.push(`/@${userName}/${boardId}`, {
+          state: {
+            boardId: boardId
+          },
+        });
       }
+    },
+    mounted() {
+      this.getBoardList();
     }
   }
 </script>

@@ -2,12 +2,12 @@
   <div class="inner">
     <h2 class="write__title">글쓰기</h2>
     <div class="write__container">
-      <form @submit.prevent="">
+      <form>
         <div class="write__wrap">
           <!-- TODO : 카테고리, 제목, 이미지, 등 input 추가 -->
           <div class="write__item">
             <label for="title">제목</label>
-            <input type="text" name="title" id="title" v-model="title" ref="title">
+            <input type="text" name="title" id="title" v-model="board_title" ref="title">
           </div>
           <div class="write__item">
             <label for="writer">작성자</label>
@@ -44,7 +44,7 @@
         </div>
         <div class="btn__container">
           <button type="button" class="btn__list">목록</button>
-          <button type="button" class="btn__save" @click="submitPostHandler">등록</button>
+          <button type="submit" class="btn__save" @click.prevent="submitPostHandler">등록</button>
         </div>
       </form>
     </div>
@@ -54,17 +54,19 @@
 <script>
   import { Editor } from '@toast-ui/editor';
   import '@toast-ui/editor/dist/toastui-editor.css';
+  import axios from 'axios';
 
   export default {
     name: 'Write',
     data() {
       return {
         editor: null,
-        writer: JSON.parse(localStorage.getItem('user')).nickname,
-        category: '',
-        title: '',
-        content: '',
-        createdAt: new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate()
+        name: JSON.parse(localStorage.getItem('user')).nickname,
+        board_category: '',
+        board_title: '',
+        board_content: '',
+        createdAt: new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate(),
+        email: JSON.parse(localStorage.getItem('user')).email
       }
     },
     computed : {
@@ -72,7 +74,7 @@
         const nickname = JSON.parse(localStorage.getItem('user')).nickname
             , name = JSON.parse(localStorage.getItem('user')).name;
 
-        return nickname ? nickname : name;
+        return name ? name : nickname;
       }
     },
     mounted() {
@@ -94,38 +96,50 @@
       });
     },
     methods : {
-      submitPostHandler() {
+      async submitPostHandler() {
         // 입력된 값 받기
-        const content = this.editor.getMarkdown()
-            , category = this.$refs.category.value
-            , writer = this.writerName
-            , title = this.title
+        const board_content = this.editor.getMarkdown()
+            , board_category = this.$refs.category.value
+            , email = this.email
+            , board_title = this.board_title
             , createdAt = this.createdAt;
 
-        if (!this.title.trim()) {
+        if (!this.board_title.trim()) {
           alert('제목을 입력해주세요.');
           this.$refs.title.focus();
 
           return;
         }
 
-        if (!content.trim()) {
+        if (!board_content.trim()) {
           alert('내용을 입력해주세요.');
           this.$refs.editor.focus();
 
           return;
         }
 
-        // TODO : 해당, 데이터 백엔드 전송 (url 지정해서 추가해주면 될 듯)
         const data = {
-          title,
-          writer,
-          content,
-          category,
-          createdAt
+          board_title,
+          board_content,
+          board_category,
+          createdAt,
+          email
         };
 
-        console.log('data : ', data);
+        try {
+          // 성공했을 경우, 게시글 등록 완료라는 alert 띄우고, 목록 페이지 이동
+          const response = await axios.post('http://jarryjeong.pe.kr/board/create', data);
+          console.log('response : ', response);
+          alert('게시글 등록 완료');
+
+          this.$router.push('/');
+        } catch (error) {
+          // 실패했을 경우, 에러 메시지 띄우고, 다시 작성 페이지 이동
+          console.log('error : ', error);
+          alert('게시글 등록 실패');
+
+          this.$router.push('/write');
+        }
       }
     }
   }

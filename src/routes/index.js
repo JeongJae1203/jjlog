@@ -4,6 +4,7 @@ import DefaultLayout from '@/components/layout/PublicLayout.vue'
 import Home from '@/views/Home.vue'
 import Login from '@/views/login/Login.vue'
 import Join from '@/views/login/Join.vue'
+import BoardDetail from '@/components/elements/BoardDetail.vue'
 
 import DashboardLayout from '@/components/dashboard/DashboardLayout.vue'
 import DashboardHome from '@/views/dashboard/Home.vue'
@@ -22,6 +23,11 @@ const routes = [
         path: '/write',
         component: Write,
         meta: { requiresAuth: true }
+      },
+      {
+        path: '/:userName/:boardId',
+        component: BoardDetail,
+        meta: { requiresAuth: false }
       }
     ]
   },
