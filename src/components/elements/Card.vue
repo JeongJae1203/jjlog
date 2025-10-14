@@ -2,7 +2,7 @@
   <div class="card">
     <!-- 등록한 썸네일 -->
     <div class="card__thumbnail">
-      <img src="https://picsum.photos/348/150" alt="썸네일">
+      <img :src="computedImage" alt="썸네일">
     </div>
     <div class="card__content">
       <!-- 제목 -->
@@ -41,6 +41,13 @@
           return this.board.board_count;
         } else {
           return 0;
+        }
+      },
+      computedImage() {
+        if (this.board.image) {
+          return this.board.image;
+        } else {
+          return 'https://picsum.photos/348/150';
         }
       }
     }

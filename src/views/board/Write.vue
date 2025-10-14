@@ -67,7 +67,7 @@
         board_content: '',
         createdAt: new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate(),
         email: JSON.parse(localStorage.getItem('user')).email,
-        imageList: []
+        imageList: null
       }
     },
     computed : {
@@ -90,20 +90,21 @@
         previewStyle: 'vertical',
         hooks: {
           addImageBlobHook: (blob, callback) => {
-            console.log('blob : ', blob);
             self.uploadImage(blob, callback);
           }
         }
       });
     },
     methods : {
-      async submitPostHandler(imageList) {
+      async submitPostHandler() {
+        console.log('imageList : ', this.imageList);
         // 입력된 값 받기
         const board_content = this.editor.getMarkdown()
             , board_category = this.$refs.category.value
             , email = this.email
             , board_title = this.board_title
-            , createdAt = this.createdAt;
+            , createdAt = this.createdAt
+            , imageList = this.imageList;
 
         if (!this.board_title.trim()) {
           alert('제목을 입력해주세요.');
@@ -130,11 +131,10 @@
 
         try {
           // 성공했을 경우, 게시글 등록 완료라는 alert 띄우고, 목록 페이지 이동
-          const response = await axios.post('http://localhost:4000/board/create', data);
-          console.log('response : ', response);
+          const response = await axios.post('http://jarryjeong.pe.kr/board/create', data);
           alert('게시글 등록 완료');
 
-          // this.$router.push('/');
+          this.$router.push('/');
         } catch (error) {
           // 실패했을 경우, 에러 메시지 띄우고, 다시 작성 페이지 이동
           console.log('error : ', error);
@@ -147,7 +147,7 @@
         const formData = new FormData();
         formData.append('image', blob);
         
-        axios.post('http://localhost:4000/board/uploadImage', formData, {
+        axios.post('http://jarryjeong.pe.kr/board/uploadImage', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
@@ -156,13 +156,13 @@
           const imageUrl = response.data.url;
           
           // Toast UI Editor의 callback에 URL 문자열 전달
-          callback(imageUrl);
+          callback(imageUrl);          
 
           // 성공 시, data에 이미지 주소 저장
           if (!this.imageList) {
-            this.$set(this, 'imageList', []);
+            this.imageList = null;
           }
-          this.imageList.push(imageUrl);
+          this.imageList = imageUrl;
         })
         .catch(error => {
           console.log('이미지 업로드 에러 : ', error);

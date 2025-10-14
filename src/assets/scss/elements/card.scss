@@ -5,6 +5,14 @@
   box-shadow: 0 3px 6px rgba(0, 0, 0, .16);
   transition: .35s;
 
+  .card__thumbnail {
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+
   .card__content {
     padding: 1.6rem;
 
@@ -70,6 +78,10 @@
 
 @media all and (min-width: 768px) {
   .card {
+    .card__thumbnail {
+      height: 15rem;
+    }
+
     .card__content {
       &-summary {
         height: 7.9rem;

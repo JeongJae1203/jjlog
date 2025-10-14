@@ -18,7 +18,7 @@
 @media all and (min-width: 768px) {
   .card__wrap {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, calc(50% - .75rem));
     gap: 1.5rem;
 
     .card {
@@ -31,12 +31,12 @@
 
 @media all and (min-width: 1024px) {
   .card__wrap {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, calc(100% / 3 - 1rem));
   }
 }
 
 @media all and (min-width: 1400px) {
   .card__wrap {
-    grid-template-columns: repeat(4, 348px);
+    grid-template-columns: repeat(4, calc(25% - 1.2rem));
   }
 }
