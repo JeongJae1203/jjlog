@@ -66,7 +66,8 @@
         board_title: '',
         board_content: '',
         createdAt: new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate(),
-        email: JSON.parse(localStorage.getItem('user')).email
+        email: JSON.parse(localStorage.getItem('user')).email,
+        imageList: []
       }
     },
     computed : {
@@ -78,6 +79,9 @@
       }
     },
     mounted() {
+      // this 컨텍스트를 변수에 저장
+      const self = this;
+      
       // 에디터 초기화
       this.editor = new Editor({
         el: this.$refs.editor,
@@ -86,17 +90,14 @@
         previewStyle: 'vertical',
         hooks: {
           addImageBlobHook: (blob, callback) => {
-            const formData = new FormData();
-            formData.append('image', blob);
-
-            // TODO : 이미지 upload 하는 로직 추가
-            callback(blob);
+            console.log('blob : ', blob);
+            self.uploadImage(blob, callback);
           }
         }
       });
     },
     methods : {
-      async submitPostHandler() {
+      async submitPostHandler(imageList) {
         // 입력된 값 받기
         const board_content = this.editor.getMarkdown()
             , board_category = this.$refs.category.value
@@ -123,16 +124,17 @@
           board_content,
           board_category,
           createdAt,
-          email
+          email,
+          imageList
         };
 
         try {
           // 성공했을 경우, 게시글 등록 완료라는 alert 띄우고, 목록 페이지 이동
-          const response = await axios.post('http://jarryjeong.pe.kr/board/create', data);
+          const response = await axios.post('http://localhost:4000/board/create', data);
           console.log('response : ', response);
           alert('게시글 등록 완료');
 
-          this.$router.push('/');
+          // this.$router.push('/');
         } catch (error) {
           // 실패했을 경우, 에러 메시지 띄우고, 다시 작성 페이지 이동
           console.log('error : ', error);
@@ -140,6 +142,33 @@
 
           this.$router.push('/write');
         }
+      },
+      uploadImage(blob, callback) {
+        const formData = new FormData();
+        formData.append('image', blob);
+        
+        axios.post('http://localhost:4000/board/uploadImage', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        })
+        .then(response => {
+          const imageUrl = response.data.url;
+          
+          // Toast UI Editor의 callback에 URL 문자열 전달
+          callback(imageUrl);
+
+          // 성공 시, data에 이미지 주소 저장
+          if (!this.imageList) {
+            this.$set(this, 'imageList', []);
+          }
+          this.imageList.push(imageUrl);
+        })
+        .catch(error => {
+          console.log('이미지 업로드 에러 : ', error);
+          // 에러 발생 시 callback에 빈 문자열 전달
+          callback('');
+        });
       }
     }
   }
