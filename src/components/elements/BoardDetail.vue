@@ -19,7 +19,7 @@
         <button @click="goList" class="btn-list">목록으로</button>
         <div v-if="isAuthor" class="btn-group">
           <button @click="editPost" class="btn-edit">수정</button>
-          <button @click="deletePost" class="btn-delete">삭제</button>
+          <button @click="deleteBoard" class="btn-delete">삭제</button>
         </div>
       </div>
     </div>
@@ -37,7 +37,7 @@
       return {
         board: {},
         boardId: this.$route.params.boardId,
-        viewer: null
+        viewer: null,
       }
     },
     setup() {
@@ -56,7 +56,7 @@
       isAuthor() {
         // 현재 로그인한 사용자가 게시글 작성자인지 확인
         return this.userStore.isLoggedIn && 
-              this.userStore.user?.id === this.board.user_id;
+              this.userStore.user?.email === this.board.email;
       }
     },
     methods: {
@@ -89,6 +89,24 @@
       goList() {
         this.$router.push('/');
       },
+      // 삭제 기능
+      // 회원이 작성한 게시글이면 삭제 가능
+      async deleteBoard() {
+        if (this.isAuthor) {
+          if (confirm('삭제하시겠습니까?')) {
+            const response = await axios.delete(`http://jarryjeong.pe.kr/board/remove/${this.boardId}`);
+
+            if (response.data.success) {
+              alert('게시글이 성공적으로 삭제되었습니다.');
+              this.$router.push('/');
+            } else {
+              alert('게시글 삭제에 실패했습니다.');
+            }
+          }
+        } else {
+          alert('삭제 권한이 없습니다.');
+        }
+      }
     },
     mounted() {
       this.getBoardDetail(this.boardId);
