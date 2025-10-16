@@ -1,5 +1,6 @@
-@use './font' as *;
-@use './variables' as *;
+@use './common/font' as *;
+@use './common/variables' as *;
+@use './common/color' as *;
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { font-size: 10px; }

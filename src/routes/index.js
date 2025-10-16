@@ -25,6 +25,12 @@ const routes = [
         meta: { requiresAuth: true }
       },
       {
+        path: '/write/:boardId',
+        component: Write,
+        props: true,
+        meta: { requiresAuth: true }
+      },
+      {
         path: '/:userName/:boardId',
         component: BoardDetail,
         meta: { requiresAuth: false }

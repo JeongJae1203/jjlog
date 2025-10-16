@@ -6,7 +6,7 @@
         ref="writeBtn"
         class="btn__write"
         @click="writeHandler"
-      >글쓰기</button>
+      ><i class="pi pi-pencil"></i> 글쓰기</button>
     </div>
     <div class="card__wrap">
       <Card 

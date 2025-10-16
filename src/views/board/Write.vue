@@ -1,10 +1,9 @@
 <template>
   <div class="inner">
-    <h2 class="write__title">글쓰기</h2>
+    <h2 class="write__title">{{ pageTitle }}</h2>
     <div class="write__container">
       <form>
         <div class="write__wrap">
-          <!-- TODO : 카테고리, 제목, 이미지, 등 input 추가 -->
           <div class="write__item">
             <label for="title">제목</label>
             <input type="text" name="title" id="title" v-model="board_title" ref="title">
@@ -58,6 +57,12 @@
 
   export default {
     name: 'Write',
+    props: {
+      boardId: {
+        type: [String, Number],
+        default: null
+      }
+    },
     data() {
       return {
         editor: null,
@@ -67,7 +72,9 @@
         board_content: '',
         createdAt: new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate(),
         email: JSON.parse(localStorage.getItem('user')).email,
-        imageList: null
+        imageList: null,
+        isEdit: false,
+        originalBoard: null
       }
     },
     computed : {
@@ -76,11 +83,17 @@
             , name = JSON.parse(localStorage.getItem('user')).name;
 
         return name ? name : nickname;
+      },
+      pageTitle() {
+        return this.isEdit ? '글 수정' : '글쓰기';
       }
     },
     mounted() {
       // this 컨텍스트를 변수에 저장
       const self = this;
+      
+      // route params에서 boardId 가져오기
+      const boardId = this.boardId || this.$route.params.boardId;
       
       // 에디터 초기화
       this.editor = new Editor({
@@ -92,12 +105,42 @@
           addImageBlobHook: (blob, callback) => {
             self.uploadImage(blob, callback);
           }
+        },
+        events : {
+          load: () => {
+            if (boardId) {
+              this.isEdit = true;
+              this.loadBoardData(boardId);
+            }
+          }
         }
       });
     },
     methods : {
+      async loadBoardData(boardId) {
+        try {
+          const response = await axios.get(`http://jarryjeong.pe.kr/board/${boardId}`);
+          this.originalBoard = await response.data.data;
+
+          // 폼 데이터 채우기
+          this.board_title = this.originalBoard.board_title;
+          this.board_category = this.originalBoard.board_category;
+          this.createdAt = this.originalBoard.created_at ? 
+            new Date(this.originalBoard.created_at).toISOString().split('T')[0] : 
+            this.createdAt;
+          
+          // 에디터에 기존 내용 설정 (에디터가 완전히 준비된 후)
+          // ✨ 4. 에디터가 준비된 것이 보장되므로, 바로 setMarkdown을 호출합니다.
+          if (this.originalBoard.board_content) {
+            this.editor.setMarkdown(this.originalBoard.board_content);
+          }
+        } catch (error) {
+          console.error('게시글 로딩 실패:', error);
+          alert('게시글을 불러오는데 실패했습니다.');
+          this.$router.push('/');
+        }
+      },
       async submitPostHandler() {
-        console.log('imageList : ', this.imageList);
         // 입력된 값 받기
         const board_content = this.editor.getMarkdown()
             , board_category = this.$refs.category.value
@@ -130,18 +173,53 @@
         };
 
         try {
-          // 성공했을 경우, 게시글 등록 완료라는 alert 띄우고, 목록 페이지 이동
-          const response = await axios.post('http://jarryjeong.pe.kr/board/create', data);
-          alert('게시글 등록 완료');
+          console.log(this.isEdit);
+          let response;
+          const boardId = this.boardId || this.$route.params.boardId;
+          
+          if (this.isEdit) {
+            // 수정 모드
+            response = await axios.put(`http://jarryjeong.pe.kr/board/update/${boardId}`, data);
+            alert('게시글 수정 완료');
+          } else {
+            // 등록 모드
+            response = await axios.post('http://jarryjeong.pe.kr/board/create', data);
+            alert('게시글 등록 완료');
+          }
 
           this.$router.push('/');
         } catch (error) {
           // 실패했을 경우, 에러 메시지 띄우고, 다시 작성 페이지 이동
-          console.log('error : ', error);
-          alert('게시글 등록 실패');
+          console.error('error : ', error);
+          alert(this.isEdit ? '게시글 수정 실패' : '게시글 등록 실패');
 
-          this.$router.push('/write');
+          if (this.isEdit) {
+            const boardId = this.boardId || this.$route.params.boardId;
+            this.$router.push(`/write/${boardId}`);
+          } else {
+            this.$router.push('/write');
+          }
         }
+      },
+      setEditorContent() {
+        // 에디터가 준비될 때까지 대기
+        const checkEditor = () => {
+          if (this.editor && this.originalBoard && this.originalBoard.board_content) {
+            try {
+              // 에디터에 내용 설정
+              this.editor.setMarkdown(this.originalBoard.board_content);
+            } catch (error) {
+              console.error('에디터 내용 설정 실패:', error);
+              // 재시도
+            }
+          } else if (this.originalBoard && this.originalBoard.board_content) {
+            // 에디터가 아직 준비되지 않았으면 재시도
+            setTimeout(checkEditor, 5000);
+          }
+        };
+        
+        // 즉시 체크 시작
+        checkEditor();
       },
       uploadImage(blob, callback) {
         const formData = new FormData();
@@ -165,12 +243,12 @@
           this.imageList = imageUrl;
         })
         .catch(error => {
-          console.log('이미지 업로드 에러 : ', error);
+          console.error('이미지 업로드 에러 : ', error);
           // 에러 발생 시 callback에 빈 문자열 전달
           callback('');
         });
       }
-    }
+    },
   }
 </script>
 

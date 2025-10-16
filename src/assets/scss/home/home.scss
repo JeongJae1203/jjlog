@@ -15,6 +15,19 @@
   }
 }
 
+.btn__write {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  border-bottom: 1px solid #DDD;
+  transition: .35s;
+
+  &:hover {
+    font-weight: 700;
+  }
+}
+
 @media all and (min-width: 768px) {
   .card__wrap {
     display: grid;
