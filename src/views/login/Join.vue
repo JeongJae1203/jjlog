@@ -3,7 +3,7 @@
     <div class="login__container">
       <div class="login__logo">
         <router-link to="/" title="메인으로">
-          <img src="@/assets/images/jjlog_logo.png" alt="logo">
+          <img src="@/assets/images/jjlog_logo_white.png" alt="logo">
         </router-link>
       </div>
       <div class="login__content">

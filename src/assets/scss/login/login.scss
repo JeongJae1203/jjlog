@@ -1,9 +1,11 @@
+@use 'sass:map';
+@use '@/assets/scss/common/color' as *;
+
 .login {
   position: relative;
   height: 100vh;
   padding: 0 2rem;
   overflow: hidden;
-  background: linear-gradient(to right, #5B86E5, #36D1DC);
 
   .login__container {
     position: absolute;
@@ -13,7 +15,6 @@
     width: calc(100% - 4rem);
     background-color: #fff;
     border-radius: 6px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, .16);
   }
 
   .login__desc {
@@ -28,7 +29,8 @@
   }
 
   .login__logo {
-    max-height: 20rem;
+    max-width: 20rem;
+    margin: auto;
 
     > a {
       display: block;
@@ -82,19 +84,20 @@
     }
 
     .btn__container {
-      margin-top: 3.5rem;
+      margin-top: 2.5rem;
       padding-top: 1.5rem;
       text-align: center;
 
       button {
-        background-color: #36D1DC;
-        border: 1px solid #36D1DC;
+        width: 100%;
+        background-color: map.get($colors, "primary");
+        border: 1px solid map.get($colors, "primary");
         border-radius: 4px;
         color: #fff;
 
         &:hover {
           background-color: #fff;
-          color: #36D1DC;
+          color: map.get($colors, "primary");
         }
       }
     }
@@ -116,7 +119,7 @@
 
         a {
           font-size: 1.5rem;
-          color: #5B86E5;
+          color: map.get($colors, "primary");
         }
       }
     }
@@ -127,29 +130,18 @@
   .login {
     padding: 0;
 
-    .login__container {
-      display: grid;
-      grid-template-columns: 25rem auto;
-      max-width: 80rem;
-    }
-
-    .login__logo {
-      max-height: none;
-
-      > a {
-        height: 100%;
-
-        img {
-          width: auto;
-          height: 100%;
-          max-height: none;
-          border-radius: 6px 0 0 6px;
-        }
-      }
+    .login__desc {
+      max-width: 35rem;
+      margin: 3rem auto;
     }
 
     .login__content {
       padding: 3rem;
+
+      form {
+        max-width: 35rem;
+        margin: 0 auto 5rem;
+      }
 
       .login__title {
         font-size: 2.5rem;
@@ -157,7 +149,7 @@
 
       .input__wrap {
         display: flex;
-        align-items: center;
+        flex-direction: column;
         gap: 1.5rem;
         margin-bottom: 2rem;
 

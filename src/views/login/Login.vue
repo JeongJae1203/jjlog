@@ -3,12 +3,11 @@
     <div class="login__container">
       <div class="login__logo">
         <router-link to="/" title="메인으로">
-          <img src="@/assets/images/jjlog_logo.png" alt="logo">
+          <img src="@/assets/images/jjlog_logo_white.png" alt="logo">
         </router-link>
       </div>
       <div class="login__content">
-        <h2 class="login__title">로그인</h2>
-        <!-- TODO : form -->
+        <h2 class="login__title">다시 오신 것을 환영합니다.</h2>
         <form action="" @submit.prevent="submitHandler">
           <div class="input__wrap">
             <label for="email">이메일</label>
@@ -40,7 +39,7 @@
           </div>
           <div class="find">
             <div class="find__item">
-              <span>✅ 아직 회원이 아니십니까 ?</span>
+              <span>✅ 계정이 없으신가요 ?</span>
               <router-link to="/join">회원가입</router-link>
             </div>
           </div>

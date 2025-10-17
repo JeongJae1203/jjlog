@@ -1,42 +1,47 @@
-@use '@/assets/scss/common/variables' as *;
+@use 'sass:map';
+@use '@/assets/scss/common/color' as *;
 
 #footer {
-  position: relative;
-  width: 100%;
-  border-top: 1px solid #DDD;
-
-  .inner {
-    padding: 1.5rem;
-  }
+  padding: 1.5rem 0;
 
   .footer__info {
+    margin-bottom: 1.5rem;
     text-align: center;
 
-    small {
-      display: block;
-      font-size: 1.3rem;
-      color: $copyright-color;
-      line-height: 1.5;
+    &-item {
+      img {
+        max-width: 10rem;
+      }
+
+      &-desc {
+        margin-top: .5rem;
+        font-size: 1.4rem;
+        color: map.get($colors, "foreground");
+      }
     }
+  }
+
+  .footer__copyright {
+    padding-top: 1.5rem;
+    border-top: 1px solid #e5e7eb;
+    font-size: 1.3rem;
+    color: #666;
+    text-align: center;
   }
 }
 
 @media all and (min-width: 768px) {
   #footer {
     .footer__info {
-      small {
-        font-size: 1.5rem;
+      &-item {
+        &-desc {
+          font-size: 1.6rem;
+        }
       }
     }
-  }
-}
 
-@media all and (min-width: 1024px) {
-  #footer {
-    .footer__info {
-      small {
-        font-size: 1.6rem;
-      }
+    .footer__copyright {
+      font-size: 1.5rem;
     }
   }
 }

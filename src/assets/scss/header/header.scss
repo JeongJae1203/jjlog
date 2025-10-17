@@ -15,6 +15,8 @@
 
   .header__logo {
     .header__logo-link {
+      display: block;
+      max-width: 8rem;
       font: {
         family: 'Google Sans Code', sans-serif;
         size: 2rem;

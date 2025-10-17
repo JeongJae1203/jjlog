@@ -90,11 +90,16 @@
         this.$router.push('/');
       },
       editPost() {
+        // 수정 모드
+        alert('현재 해당 기능은 개발 중이므로 사용할 수 없습니다.');
+        return;
         // 수정 페이지로 이동 (boardId를 파라미터로 전달)
-        this.$router.push(`/write/${this.boardId}`);
+        // this.$router.push(`/write/${this.boardId}`);
       },
-      // 삭제 기능
-      // 회원이 작성한 게시글이면 삭제 가능
+      /**
+       * 삭제 기능
+       * 회원이 작성한 게시글이면 삭제 가능
+       */
       async deleteBoard() {
         if (this.isAuthor) {
           if (confirm('삭제하시겠습니까?')) {

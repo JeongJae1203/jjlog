@@ -179,8 +179,10 @@
           
           if (this.isEdit) {
             // 수정 모드
-            response = await axios.put(`http://jarryjeong.pe.kr/board/update/${boardId}`, data);
-            alert('게시글 수정 완료');
+            alert('현재 해당 기능은 개발 중이므로 사용할 수 없습니다.');
+            return;
+            // response = await axios.put(`http://jarryjeong.pe.kr/board/update/${boardId}`, data);
+            // alert('게시글 수정 완료');
           } else {
             // 등록 모드
             response = await axios.post('http://jarryjeong.pe.kr/board/create', data);

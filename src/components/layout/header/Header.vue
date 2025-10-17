@@ -2,7 +2,9 @@
   <header id="header">
     <div class="inner">
       <div class="header__logo">
-        <router-link to="/" class="header__logo-link">JJlog</router-link>
+        <router-link to="/" class="header__logo-link">
+          <img src="@/assets/images/jjlog_logo_white.png" alt="logo">
+        </router-link>
       </div>
       <div class="header__util">
         <div class="header__util-profile" ref="profile" @click="dashboardHandler">
