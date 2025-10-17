@@ -11,4 +11,10 @@
   &__aside {
     box-shadow: 0 3px 6px rgba(0, 0, 0, .16);
   }
+
+  #main {
+    > section {
+      padding: 2.5rem;
+    }
+  }
 }

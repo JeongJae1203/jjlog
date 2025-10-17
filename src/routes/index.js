@@ -5,10 +5,11 @@ import Home from '@/views/Home.vue'
 import Login from '@/views/login/Login.vue'
 import Join from '@/views/login/Join.vue'
 import BoardDetail from '@/components/elements/BoardDetail.vue'
+import Write from '@/views/board/Write.vue'
 
 import DashboardLayout from '@/components/dashboard/DashboardLayout.vue'
 import DashboardHome from '@/views/dashboard/Home.vue'
-import Write from '@/views/board/Write.vue'
+import Profile from '@/views/dashboard/profile/Profile.vue'
 
 const routes = [
   { 
@@ -38,7 +39,7 @@ const routes = [
     ]
   },
   { 
-    path: '/dashboard',
+    path: '/my',
     component: DashboardLayout,
     meta: { requiresAuth: true },
     children: [
@@ -46,6 +47,11 @@ const routes = [
         path: '',
         component: DashboardHome,
         name: 'DashboardHome'
+      },
+      {
+        path: '/my/profile',
+        component: Profile,
+        name: 'Profile'
       }
     ]
   },

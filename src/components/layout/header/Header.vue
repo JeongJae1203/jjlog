@@ -61,7 +61,7 @@
         console.log('검색 버튼 클릭');
       },
       dashboardHandler() {
-        this.$router.push('/dashboard');
+        this.$router.push('/my');
       },
       loginHandler() {
         // 로그인 정보가 없으면 로그인 페이지로 이동
@@ -69,7 +69,7 @@
           this.$router.push('/login');
         } else {
           // 로그인 되어있으면 대시보드로 이동
-          this.$router.push('/dashboard');
+          this.$router.push('/my');
         }
       },
       logoutHandler() {

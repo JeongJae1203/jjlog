@@ -1,6 +1,9 @@
 <template>
-  <section class="dashboard__home">
-    <Title :title="'대시보드'" />
+  <section class="Profile">
+    <Title :title="'프로필'" :iconName="'user'" />
+    <article>
+      <p>여기는 이제 프로필 나오는 영역</p>
+    </article>
   </section>
 </template>
 
