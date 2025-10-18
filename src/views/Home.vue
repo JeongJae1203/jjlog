@@ -52,7 +52,7 @@
         this.$router.push('/write');
       },
       async getBoardList() {
-        const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/board/`);
+        const response = await axios.get(`https://jarryjeong.pe.kr/board/`);
         const data = response.data.data.boards;
 
         this.boardList = data;
