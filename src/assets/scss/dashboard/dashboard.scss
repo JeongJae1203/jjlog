@@ -18,3 +18,25 @@
     }
   }
 }
+
+@media all and (min-width: 768px) {
+  .dashboard {
+    #main {
+      > section {
+        max-width: 144rem;
+        margin: 0 auto;
+        padding: 5rem;
+      }
+    }
+  }
+}
+
+@media all and (min-width: 1921px) {
+  .dashboard {
+    #main {
+      > section {
+        max-width: 192rem;
+      }
+    }
+  }
+}

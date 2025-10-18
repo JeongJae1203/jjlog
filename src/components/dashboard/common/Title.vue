@@ -44,7 +44,20 @@
 
   @media all and (min-width: 768px) {
     .dashboard__title {
+      margin-bottom: 4rem;
       font-size: 2.5rem;
+    }
+  }
+
+  @media all and (min-width: 1024px) {
+    .dashboard__title {
+      gap: 2rem;
+      margin-bottom: 5rem;
+      font-size: 4rem;
+
+      i {
+        font-size: 3rem;
+      }
     }
   }
 </style>

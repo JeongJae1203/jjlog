@@ -71,13 +71,16 @@
         // userStore의 login 액션 사용
         const result = await this.userStore.login(email, password);
         
-        if (result.success) {
-          // 로그인 성공
-          this.$router.push('/dashboard');
-        } else {
-          // 로그인 실패
+        if (!result.success) {
           alert(result.error);
+          this.email = '';
+          this.password = '';
+          this.$refs.email.focus();
+
+          return;
         }
+        
+        this.$router.push('/');
       }
     }
   }
