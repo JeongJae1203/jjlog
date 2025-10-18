@@ -1,3 +1,6 @@
+@use 'sass:map';
+@use '@/assets/scss/common/color' as *;
+
 .home__top {
   position: relative;
   padding-top: 3rem;
@@ -31,6 +34,15 @@
 .no__board {
   padding: 2.4rem;
   text-align: center;
+
+  p {
+    margin-top: 2.4rem;
+    font: {
+      size: 3rem;
+      weight: 700;
+    }
+    color: map.get($colors, "foreground");
+  }
 }
 
 @media all and (min-width: 768px) {
