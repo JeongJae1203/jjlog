@@ -63,7 +63,7 @@
     methods: {
       async getUserBoardList() {
         try {
-          const response = await axios.get(`http://localhost:8080/board/userBoardList/${this.userStore.user.email}`);
+          const response = await axios.get(`http://jarryjeong.pe.kr/board/userBoardList/${this.userStore.user.email}`);
           this.userBoardList = await response.data.data;
         } catch (error) {
           console.error('error : ', error);
@@ -72,8 +72,7 @@
       },
       async getUserInfo() {
         try {
-          const response = await axios.get(`http://localhost:8080/user/${this.userStore.user.email}`);
-          console.log(response.data.data);
+          const response = await axios.get(`http://jarryjeong.pe.kr/user/${this.userStore.user.eng_name}`);
           this.userInfo = await response.data.data;
         } catch (error) {
           console.error('error : ', error);
