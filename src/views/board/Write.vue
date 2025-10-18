@@ -119,7 +119,7 @@
     methods : {
       async loadBoardData(boardId) {
         try {
-          const response = await axios.get(`http://jarryjeong.pe.kr/board/${boardId}`);
+          const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/board/${boardId}`);
           this.originalBoard = await response.data.data;
 
           // 폼 데이터 채우기
@@ -181,11 +181,11 @@
             // 수정 모드
             alert('현재 해당 기능은 개발 중이므로 사용할 수 없습니다.');
             return;
-            // response = await axios.put(`http://jarryjeong.pe.kr/board/update/${boardId}`, data);
+            // response = await axios.put(`${import.meta.env.VITE_API_BASE_URL}/board/update/${boardId}`, data);
             // alert('게시글 수정 완료');
           } else {
             // 등록 모드
-            response = await axios.post('http://jarryjeong.pe.kr/board/create', data);
+            response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/board/create`, data);
             alert('게시글 등록 완료');
           }
 
@@ -227,7 +227,7 @@
         const formData = new FormData();
         formData.append('image', blob);
         
-        axios.post('http://jarryjeong.pe.kr/board/uploadImage', formData, {
+        axios.post(`${import.meta.env.VITE_API_BASE_URL}/board/uploadImage`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },

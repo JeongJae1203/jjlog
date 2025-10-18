@@ -97,7 +97,7 @@
             , name = this.name;
 
         try {
-          const response = await axios.post('http://jarryjeong.pe.kr/auth/regist', {
+          const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/auth/regist`, {
             email,
             password,
             nickname,
