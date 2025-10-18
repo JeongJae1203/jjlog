@@ -19,6 +19,7 @@
       </template>
       <template v-else>
         <div class="no__board">
+          <img src="@/assets/images/no_img.png" alt="게시글이 없습니다.">
           <p>게시글이 없습니다.</p>
         </div>
       </template>
