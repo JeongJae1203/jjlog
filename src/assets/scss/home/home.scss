@@ -28,6 +28,11 @@
   }
 }
 
+.no__board {
+  padding: 2.4rem;
+  text-align: center;
+}
+
 @media all and (min-width: 768px) {
   .card__wrap {
     display: grid;

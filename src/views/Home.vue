@@ -9,12 +9,19 @@
       ><i class="pi pi-pencil"></i> 글쓰기</button>
     </div>
     <div class="card__wrap">
-      <Card 
-        v-for="board in boardList" 
-        :key="board.board_id" 
-        :board="board" 
-        @click="detailHandler(board.name, board.board_id)" 
-      />
+      <template v-if="boardList.length > 0">
+        <Card 
+          v-for="board in boardList" 
+          :key="board.board_id" 
+          :board="board" 
+          @click="detailHandler(board.name, board.board_id)" 
+        />
+      </template>
+      <template v-else>
+        <div class="no__board">
+          <p>게시글이 없습니다.</p>
+        </div>
+      </template>
     </div>
   </div>
 </template>
