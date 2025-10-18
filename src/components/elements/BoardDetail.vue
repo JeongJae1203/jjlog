@@ -62,7 +62,7 @@
     methods: {
       async getBoardDetail(boardId) {
         try {
-          const response = await axios.get(`http://jarryjeong.pe.kr/board/${boardId}`);
+          const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/board/${boardId}`);
           this.board = response.data.data;
           
           // 데이터를 받아온 후 Viewer 초기화
@@ -103,7 +103,7 @@
       async deleteBoard() {
         if (this.isAuthor) {
           if (confirm('삭제하시겠습니까?')) {
-            const response = await axios.delete(`http://jarryjeong.pe.kr/board/remove/${this.boardId}`);
+            const response = await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/board/remove/${this.boardId}`);
 
             if (response.data.success) {
               alert('게시글이 성공적으로 삭제되었습니다.');
